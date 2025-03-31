@@ -1,0 +1,9 @@
+# .gitignore
+# macOS & IntelliJ/VSC spezifisch
+.DS_Store
+.idea/
+.vscode/
+target/
+*.iml
+.history/
+.DS_Store
