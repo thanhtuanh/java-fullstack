@@ -57,3 +57,36 @@ java-fullstack/
 - [`book-api`](./book-api/README.book-api.md)
 - [`book-api-full`](./book-api/README.book-api-full.md)
 - [`book-api-validation`](./book-api-validation/README.book-api-validation.md)
+
+## ▶️ Projekt ausführen
+
+Hier findest du die wichtigsten Befehle, um jedes Modul zu starten oder zu testen.
+
+---
+
+```bash
+
+### ✅ `todo-core`
+cd todo-core
+mvn compile
+mvn exec:java -Dexec.mainClass="com.example.todo.Main"
+mvn test
+
+### ✅ `book-api`
+cd book-api
+mvn clean install
+mvn spring-boot:run
+mvn test
+
+### ✅ `book-api-full`
+cd book-api-full
+mvn clean install
+mvn spring-boot:run
+mvn test
+
+### ✅ `book-api-validation`
+cd book-api-validation
+mvn clean install
+mvn spring-boot:run
+mvn test
+```
