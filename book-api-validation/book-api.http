@@ -1,0 +1,47 @@
+### 📚 Alle Bücher abrufen
+GET http://localhost:8080/api/books
+Accept: application/json
+
+###
+
+### ❌ Ungültige Buchanfrage: Leerer Titel und Autor
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "title": "",
+  "author": ""
+}
+
+
+### ➕ Neues Buch hinzufügen
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "title": "Clean Code",
+  "author": "Robert C. Martin"
+}
+
+###
+
+### 🔍 Buch mit ID 1 abrufen
+GET http://localhost:8080/api/books/1
+Accept: application/json
+
+###
+
+### ✏️ Buch mit ID 1 aktualisieren
+PUT http://localhost:8080/api/books/1
+Content-Type: application/json
+
+{
+  "title": "Clean Architecture",
+  "author": "Robert C. Martin"
+}
+
+###
+
+### ❌ Buch mit ID 1 löschen
+DELETE http://localhost:8080/api/books/2
+

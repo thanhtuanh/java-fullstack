@@ -1,4 +1,4 @@
-# 🧠 Java Fullstack Demo Projekt
+# 🧠 Java Fullstack Demo-Projekt
 
 Dies ist ein öffentliches Lern- und Demo-Projekt, das ich als Fullstack Java Entwickler im Rahmen meiner Vorbereitung auf Bewerbungen erstellt habe.  
 Es zeigt meine Kenntnisse in **Java**, **Spring Boot**, **RESTful APIs**, **Clean Code**, **Datenbankzugriff**, **Docker**, und **CI/CD**.
@@ -9,15 +9,15 @@ Ziel ist es, in mehreren Phasen ein vollständiges, realitätsnahes Beispielproj
 
 ## 🚀 Projektübersicht
 
-| Teil | Thema                                                   | Status           |
-| ---- | ------------------------------------------------------- | ---------------- |
-| 1    | Java Core & Clean Code                                  | ✅ abgeschlossen |
-| 2    | Spring Boot & REST-API (Book Service)                   | 🟡 in Arbeit     |
-| 3    | Spring Data JPA & relationale Datenbank (H2/PostgreSQL) | 🔜 geplant       |
-| 4    | Fehlerbehandlung, DTOs, Validierung                     | 🔜 geplant       |
-| 5    | Docker & Containerisierung                              | 🔜 geplant       |
-| 6    | CI/CD mit GitHub Actions                                | 🔜 geplant       |
-| 7    | Erweiterung mit Frontend (Angular oder Vue)             | 🔜 geplant       |
+| Teil | Thema                                                   |
+| ---- | ------------------------------------------------------- |
+| 1    | Java Core & Clean Code                                  |
+| 2    | Spring Boot & REST-API (Book Service)                   |
+| 3    | Spring Data JPA & relationale Datenbank (H2/PostgreSQL) |
+| 4    | Fehlerbehandlung, DTOs, Validierung                     |
+| 5    | Docker & Containerisierung                              |
+| 6    | CI/CD mit GitHub Actions                                |
+| 7    | Erweiterung mit Frontend (Angular oder Vue)             |
 
 ---
 
@@ -27,13 +27,33 @@ Ziel ist es, in mehreren Phasen ein vollständiges, realitätsnahes Beispielproj
 - Spring Boot 3.x
 - Spring Web
 - Spring Data JPA
-- H2 (in-memory DB) / PostgreSQL
+- H2 (In-Memory) & PostgreSQL (optional)
 - Maven
-- JUnit 5
-- Docker
+- JUnit 5 & MockMvc
+- Swagger / OpenAPI
+- Docker (geplant)
 - GitHub Actions (geplant)
-- Optional: Angular / Vue.js
+- Angular / Vue.js (optional)
 
 ---
 
-## 📁 Projektstruktur (geplant)
+## 📁 Projektstruktur
+
+java-fullstack/
+├── README.md <- Zentrale Übersicht
+├── todo-core/
+│ └── README.todo-core.md
+├── book-api/
+│ └── README.book-api.md
+├── book-api-validation/
+│ ├── README.book-api-validation.md
+│ ├── book-api.http
+│ ├── media/
+│ └── ...
+
+## 📂 Teilprojekte
+
+- [`todo-core`](./todo-core/README.todo-core.md)
+- [`book-api`](./book-api/README.book-api.md)
+- [`book-api-full`](./book-api/README.book-api-full.md)
+- [`book-api-validation`](./book-api-validation/README.book-api-validation.md)
