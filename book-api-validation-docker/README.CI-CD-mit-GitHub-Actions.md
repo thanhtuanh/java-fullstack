@@ -28,5 +28,4 @@ Dieses Projekt verwendet **GitHub Actions**, um bei jedem Push oder Pull Request
 - 📦 Testberichte und Coverage als Artefakte hochladen
 
 📸 **Ablauf im GitHub Actions Workflow (Ergebnis):**
-
-## ![CI/CD Workflow Ablauf](./assets/result-image.gif)
+![CI/CD Workflow Ablauf](./media/ci-cd.gif)
