@@ -55,7 +55,7 @@ java-fullstack/
 
 - [`todo-core`](./todo-core/README.todo-core.md)
 - [`book-api`](./book-api/README.book-api.md)
-- [`book-api-full`](./book-api/README.book-api-full.md)
+- [`book-api-full`](./book-api-full/README.book-api-full.md)
 - [`book-api-validation`](./book-api-validation/README.book-api-validation.md)
 
 ## ▶️ Projekt ausführen

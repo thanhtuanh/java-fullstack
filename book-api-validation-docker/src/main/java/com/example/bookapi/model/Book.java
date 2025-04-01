@@ -1,7 +1,9 @@
 package com.example.bookapi.model;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 @Entity
 public class Book {
@@ -10,13 +12,20 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String title;
-
-    @NotBlank
     private String author;
 
-    // Getter & Setter
+    // ✅ Leerer Standard-Konstruktor (wird von JPA benötigt)
+    public Book() {
+    }
+
+    // ✅ Benutzerdefinierter Konstruktor für deinen Service
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+
+    // ✅ Getter & Setter
     public Long getId() {
         return id;
     }

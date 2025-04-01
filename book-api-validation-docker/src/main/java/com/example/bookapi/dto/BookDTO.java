@@ -4,13 +4,23 @@ import jakarta.validation.constraints.NotBlank;
 
 public class BookDTO {
 
+    private Long id;
+
     @NotBlank(message = "Titel darf nicht leer sein")
     private String title;
 
     @NotBlank(message = "Autor darf nicht leer sein")
     private String author;
 
-    // Getter und Setter
+    // Getter & Setter
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
