@@ -21,9 +21,21 @@ jobs:
         distribution: 'temurin'
 
     - name: 🧪 Build & Test with Maven
-      run: mvn clean package
+      run: mvn clean verify
       working-directory: book-api-validation-docker
 
     - name: 🐳 Build Docker Image
       run: docker build -t book-api:latest .
       working-directory: book-api-validation-docker
+
+    - name: 📦 Upload JUnit Test Reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: junit-reports
+        path: book-api-validation-docker/target/surefire-reports
+
+    - name: 📦 Upload JaCoCo Code Coverage Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: jacoco-report
+        path: book-api-validation-docker/target/site/jacoco
