@@ -16,29 +16,35 @@ Dieses Projekt zeigt eine vollständige Spring Boot REST API mit DTO-Validierung
 ## ▶️ Projekt starten
 
 ```bash
-mvn clean package
-
+mvn clean package ## Hier starte mockmvc unittest
 
 ```
 
 ## 🐳 Docker verwenden
 
 ```bash
-docker build -t book-api-validation .
-docker run -p 8080:8080 book-api-validation
+docker-compose down
+docker-compose up --build
+
 ```
 
-## 📘 Swagger UI
+## 🧪 Testübersicht
 
-[http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+### 🛡️ Eingabevalidierung & Fehlerbehandlung (HTTP 400)
 
-## 🧪 Beispiel-Test
+![Validation Demo](media/validation-demo.gif)
 
-```bash
-mvn test
-```
+### 🧪 Automatisierte REST-Tests mit JUnit 5 & MockMvc
 
-Testet POST-Anfrage mit leerem JSON → HTTP 400 mit Fehlermeldungen
+![JUnit Test](media/mockmvc-test.gif)
+
+### 📘 Interaktive API-Dokumentation mit Swagger UI
+
+![Swagger Demo](media/swagger-demo.gif)
+
+### 📄 API-Tests mit .http-Dateien direkt in VS Code
+
+![HTTP File Demo](media/http-test.gif)
 
 ## 🧑‍💻 Autor
 
