@@ -1,0 +1,16 @@
+<h2>Buchdetails</h2>
+
+<div *ngIf="book">
+  <p><strong>Titel:</strong> {{ book.title }}</p>
+  <p><strong>Autor:</strong> {{ book.author }}</p>
+  <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+  <p><strong>Beschreibung:</strong> {{ book.description }}</p>
+  <p><strong>Veröffentlichung:</strong> {{ book.publication_date }}</p>
+  <p><strong>Genre:</strong> {{ book.genre }}</p>
+  <p><strong>Seiten:</strong> {{ book.pages }}</p>
+  <p><strong>Preis:</strong> {{ book.price | currency:'EUR' }}</p>
+  <p><strong>Verfügbar:</strong> {{ book.in_stock ? 'Ja' : 'Nein' }}</p>
+
+  <button (click)="goToEdit()">Bearbeiten</button>
+  <a routerLink="/books">Zurück zur Liste</a>
+</div>

@@ -1,0 +1,34 @@
+<h2>Buch bearbeiten</h2>
+
+<form *ngIf="book" (ngSubmit)="updateBook()">
+  <label for="title">Titel:</label>
+  <input id="title" [(ngModel)]="book.title" name="title" required><br>
+
+  <label for="author">Autor:</label>
+  <input id="author" [(ngModel)]="book.author" name="author" required><br>
+
+  <label for="isbn">ISBN:</label>
+  <input id="isbn" [(ngModel)]="book.isbn" name="isbn" required><br>
+
+  <label for="description">Beschreibung:</label>
+  <textarea id="description" [(ngModel)]="book.description" name="description"></textarea><br>
+
+  <label for="publication_date">Veröffentlichung:</label>
+  <input id="publication_date" type="date" [(ngModel)]="book.publication_date" name="publication_date"><br>
+
+  <label for="genre">Genre:</label>
+  <input id="genre" [(ngModel)]="book.genre" name="genre"><br>
+
+  <label for="pages">Seiten:</label>
+  <input id="pages" type="number" [(ngModel)]="book.pages" name="pages"><br>
+
+  <label for="price">Preis (€):</label>
+  <input id="price" type="number" [(ngModel)]="book.price" name="price" step="0.01"><br>
+
+  <label for="in_stock">Verfügbar:</label>
+  <input id="in_stock" type="checkbox" [(ngModel)]="book.in_stock" name="in_stock"><br><br>
+
+  <button type="submit">Aktualisieren</button>
+</form>
+
+<a routerLink="/books">Zurück zur Liste</a>

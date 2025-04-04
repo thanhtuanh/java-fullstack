@@ -1,0 +1,35 @@
+<h2>Bücherliste</h2>
+
+<button (click)="goToCreate()">➕ Neues Buch</button>
+
+<div *ngIf="isLoading">Lade Bücher...</div>
+<div *ngIf="error">{{ error }}</div>
+
+<table *ngIf="!isLoading && books.length > 0" border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Titel</th>
+      <th>Autor</th>
+      <th>Genre</th>
+      <th>Preis</th>
+      <th>Aktionen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books">
+      <td>{{ book.title }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.genre }}</td>
+      <td>{{ book.price | currency:'EUR' }}</td>
+      <td>
+        <a [routerLink]="['/books', book.id]">Details</a> |
+        <a [routerLink]="['/books', book.id, 'edit']">Bearbeiten</a> |
+        <button (click)="deleteBook(book.id)">Löschen</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!isLoading && books.length === 0">
+  <p>Keine Bücher gefunden.</p>
+</div>
