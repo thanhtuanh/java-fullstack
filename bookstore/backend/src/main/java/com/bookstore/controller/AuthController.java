@@ -31,6 +31,9 @@ public class AuthController {
                             loginRequest.getUsername(),
                             loginRequest.getPassword()));
 
+            System.out.println("Login-Versuch: " + loginRequest.getUsername());
+            System.out.println("Passwort (eingetippt): " + loginRequest.getPassword());
+
             // Generate JWT token
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String token = jwtService.generateToken(userDetails.getUsername());

@@ -4,7 +4,7 @@ Content-Type: application/json
 
 {
   "username": "admin",
-  "password": "1234"
+  "password": "admin"
 }
 
 ### 2. Geschützte Route aufrufen mit Token
