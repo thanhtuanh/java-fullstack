@@ -6,4 +6,5 @@
 *.iml
 .history/
 target/
+**/target/
 .DS_Store
