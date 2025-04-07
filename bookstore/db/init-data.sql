@@ -24,6 +24,11 @@ INSERT INTO books (title, author, isbn, description, publication_date, price, pa
 ('Embedded Systems', 'Autor Y', '9780000000049', 'Beschreibung für Embedded Systems.', '2013-10-04', 33.62, 371, 'Informatik', TRUE),
 ('Compilerbau', 'Autor Z', '9780000000050', 'Beschreibung für Compilerbau.', '2013-02-10', 59.44, 731, 'Informatik', TRUE);
 
--- Admin-Benutzer einfügen (Passwort ist bcrypt für 'admin')
-INSERT INTO users (username, password, role, enabled) VALUES
-('admin', '$2a$10$HyuZ/MLnsMQ29.PZgp46mOBI2DaZ8nrfP2msUxDwkHfZecFTNOcyK', 'ROLE_ADMIN', TRUE);
+-- init-db.sql
+
+-- Füge den Benutzer 'admin' hinzu
+INSERT INTO users (username, password, role, enabled)
+VALUES 
+('admin', '$2a$10$EkilMzosj1c7p5kBlFA.ce8E1BbVDY5kF9XyYp41jRBXJEWQzneN2', 'ROLE_ADMIN', true)
+ON CONFLICT (username) DO NOTHING;  -- Falls der Benutzer bereits existiert, nichts tun
+

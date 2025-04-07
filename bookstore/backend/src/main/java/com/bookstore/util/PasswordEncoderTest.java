@@ -1,10 +1,12 @@
 package com.bookstore.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+@Slf4j // Aktiviert das Logging für diese Klasse
 @Configuration
 public class PasswordEncoderTest {
 
@@ -12,19 +14,23 @@ public class PasswordEncoderTest {
     public CommandLineRunner testPasswordEncoder() {
         return args -> {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-            String plainPassword = "admin";
-            String encodedPassword = encoder.encode(plainPassword);
+            String plainPassword = "admin"; // Klartext-Passwort
+            String encodedPassword = encoder.encode(plainPassword); // Passwort verschlüsseln
 
-            System.out.println("====== PASSWORT DEBUG ======");
-            System.out.println("Klartext: " + plainPassword);
-            System.out.println("Encoded: " + encodedPassword);
+            log.info("====== PASSWORT DEBUG ======");
+            log.info("Klartext: {}", plainPassword); // Logge das Klartext-Passwort
+            log.debug("Encoded: {}", encodedPassword); // Logge das verschlüsselte Passwort (nur im Debug-Level)
 
-            // Überprüfen, ob das gespeicherte Passwort mit 'admin' übereinstimmt
-            String storedHash = "$2a$10$A4NQzOmMxEE9v6.RDGLDu.nIMRtRXp6Rk91yE9nsOAdBI7dDwnO5C";
-            boolean isMatch = encoder.matches(plainPassword, storedHash);
+            // Der gespeicherte Hash für das Passwort 'admin'
+            String storedHash = "$2a$10$HyuZ/MLnsMQ29.PZgp46mOBI2DaZ8nrfP2msUxDwkHfZecFTNOcyK"; // Festes Passwort für
+                                                                                                // 'admin'
 
-            System.out.println("Passwort stimmt überein: " + isMatch);
-            System.out.println("============================");
+            // Überprüfen, ob das gespeicherte Passwort mit dem Klartext-Passwort
+            // übereinstimmt
+            boolean isMatch = encoder.matches(plainPassword, storedHash); // Überprüfen der Übereinstimmung
+
+            log.info("Passwort stimmt überein: {}", isMatch); // Logge das Ergebnis des Vergleichs
+            log.info("============================");
         };
     }
 }

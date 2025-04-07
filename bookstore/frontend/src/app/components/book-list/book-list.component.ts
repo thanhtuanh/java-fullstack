@@ -1,85 +1,70 @@
-// ✅ book-list.component.ts
-
 import { Component, OnInit } from '@angular/core';
+import { BookService } from '../../services/book.service';
+import { Book } from '../../models/book.model';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule, Router } from '@angular/router';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { BookService, Book } from '../../services/book.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-book-list',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, MatPaginatorModule],
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.css']
+  styleUrls: ['./book-list.component.css'],
+  standalone: true,
+  imports: [CommonModule, RouterModule, FormsModule]
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];
-  filteredBooks: Book[] = [];
-  isLoading = false;
-  error: string | null = null;
-  searchQuery = '';
-  page = 0;
+  visibleBooks: Book[] = [];
+  searchText: string = '';
+  hasError: boolean = false;
 
   constructor(
     private readonly bookService: BookService,
+    public authService: AuthService,
     private readonly router: Router
   ) { }
 
   ngOnInit(): void {
-    this.loadBooks();
-  }
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+      return;
+    }
 
-  loadBooks(): void {
-    this.isLoading = true;
     this.bookService.getBooks().subscribe({
       next: (data) => {
         this.books = data;
-        this.filteredBooks = [...this.books];
-        this.isLoading = false;
+        this.hasError = false;
+        this.updateFilteredBooks();
       },
-      error: () => {
-        this.error = 'Fehler beim Laden der Bücher.';
-        this.isLoading = false;
+      error: (err) => {
+        console.error('❌ Fehler beim Laden der Bücher:', err);
+        this.hasError = true;
       }
     });
   }
 
-  filterBooks(): void {
-    if (this.searchQuery) {
-      const query = this.searchQuery.toLowerCase();
-      this.filteredBooks = this.books.filter(book =>
-        book.title.toLowerCase().includes(query) ||
-        book.author.toLowerCase().includes(query) ||
-        book.genre.toLowerCase().includes(query)
-      );
-    } else {
-      this.filteredBooks = [...this.books];
-    }
-    this.page = 0;
+
+  updateFilteredBooks(): void {
+    const search = this.searchText.toLowerCase();
+    this.visibleBooks = this.books.filter(book =>
+      book.title.toLowerCase().includes(search) ||
+      book.author.toLowerCase().includes(search) ||
+      book.genre.toLowerCase().includes(search)
+    );
   }
 
-  onPageChange(event: any): void {
-    this.page = event.pageIndex;
-  }
+  deleteBook(id: number): void {
+    if (!confirm('Buch wirklich löschen?')) return;
 
-  onEdit(book: Book): void {
-    this.router.navigate(['/books', book.id, 'edit']);
-  }
-
-  onDelete(book: Book): void {
-    const confirmed = confirm(`Soll das Buch "${book.title}" wirklich gelöscht werden?`);
-    if (confirmed) {
-      this.bookService.deleteBook(book.id).subscribe({
-        next: () => {
-          this.books = this.books.filter(b => b.id !== book.id);
-          this.filterBooks();
-        },
-        error: () => {
-          this.error = 'Löschen fehlgeschlagen.';
-        }
-      });
-    }
+    this.bookService.deleteBook(id).subscribe({
+      next: () => {
+        this.books = this.books.filter(book => book.id !== id);
+        this.updateFilteredBooks();
+      },
+      error: (err) => {
+        console.error('❌ Fehler beim Löschen des Buches:', err);
+      }
+    });
   }
 }

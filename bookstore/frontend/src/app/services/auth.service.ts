@@ -1,14 +1,35 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+interface LoginResponse {
+  token: string;
+  username: string;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth/login';
+  //private readonly API_URL = '/api/auth/login';
+  private readonly API_URL = 'http://localhost:8080/api/auth/login'; // Backend statt Frontend
 
-  constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post(this.baseUrl, { username, password });
+  constructor(private readonly http: HttpClient) { }
+
+  login(username: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(this.API_URL, { username, password });
+  }
+
+  logout(): void {
+    localStorage.clear();
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  getUsername(): string | null {
+    return localStorage.getItem('username');
   }
 }
