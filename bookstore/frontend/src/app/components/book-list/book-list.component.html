@@ -14,6 +14,11 @@
     </a>
   </div>
 
+  <div *ngIf="!hasError && filteredBooks.length > 0" style="margin-bottom: 10px;">
+    📦 Gesamt: {{ filteredBooks.length }} Bücher gefunden
+  </div>
+
+
   <div *ngIf="hasError" style="color: #cc0000; font-weight: bold; margin-top: 20px;">
     ⚠️ Fehler beim Laden der Bücher.
   </div>
@@ -26,13 +31,13 @@
     style="width: 90%; margin: auto; border-collapse: collapse; margin-top: 20px; text-align: left;">
     <thead>
       <tr>
-        <th>Titel</th>
-        <th>Autor</th>
-        <th>Genre</th>
-        <th>Seiten</th>
-        <th>Preis (€)</th>
-        <th>Verfügbar</th>
-        <th>Aktion</th>
+        <th style="width: 20%;">Titel</th>
+        <th style="width: 15%;">Autor</th>
+        <th style="width: 15%;">Genre</th>
+        <th style="width: 10%;">Seiten</th>
+        <th style="width: 10%;">Preis (€)</th>
+        <th style="width: 10%;">Verfügbar</th>
+        <th style="width: 20%;">Aktion</th>
       </tr>
     </thead>
     <tbody>
@@ -51,6 +56,18 @@
           <a href="#" (click)="deleteBook(book.id)">🗑️</a>
         </td>
       </tr>
+      <!-- Leere Zeilen auffüllen -->
+      <tr *ngFor="let empty of [].constructor(itemsPerPage - visibleBooks.length)">
+        <td colspan="7">&nbsp;</td>
+      </tr>
     </tbody>
   </table>
+
+  <div *ngIf="totalPages() > 1" style="margin: 20px;">
+    <button *ngFor="let page of [].constructor(totalPages()); let i = index" (click)="goToPage(i + 1)"
+      [style.fontWeight]="currentPage === (i + 1) ? 'bold' : 'normal'"
+      style="margin: 0 5px; padding: 5px 10px; border-radius: 4px;">
+      {{ i + 1 }}
+    </button>
+  </div>
 </div>

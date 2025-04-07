@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book.model';
@@ -15,9 +16,13 @@ import { AuthService } from '../../services/auth.service';
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];
+  filteredBooks: Book[] = [];
   visibleBooks: Book[] = [];
   searchText: string = '';
   hasError: boolean = false;
+
+  currentPage = 1;
+  itemsPerPage = 5;
 
   constructor(
     private readonly bookService: BookService,
@@ -44,14 +49,35 @@ export class BookListComponent implements OnInit {
     });
   }
 
-
   updateFilteredBooks(): void {
     const search = this.searchText.toLowerCase();
-    this.visibleBooks = this.books.filter(book =>
+    this.filteredBooks = this.books.filter(book =>
       book.title.toLowerCase().includes(search) ||
       book.author.toLowerCase().includes(search) ||
       book.genre.toLowerCase().includes(search)
     );
+
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.visibleBooks = this.filteredBooks.slice(start, end);
+
+    // ⛔ kein redirect zu welcome!
+  }
+
+
+  updateVisibleBooks(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.visibleBooks = this.filteredBooks.slice(startIndex, endIndex);
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
+    this.updateVisibleBooks();
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.filteredBooks.length / this.itemsPerPage);
   }
 
   deleteBook(id: number): void {
@@ -67,4 +93,5 @@ export class BookListComponent implements OnInit {
       }
     });
   }
+
 }

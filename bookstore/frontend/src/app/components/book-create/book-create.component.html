@@ -1,54 +1,69 @@
-<div class="form-container">
-  <h2>📘 Neues Buch erstellen</h2>
+<div style="max-width: 600px; margin: 40px auto;">
+  <h2>➕ Neues Buch erstellen</h2>
 
-  <form (ngSubmit)="createBook()" *ngIf="book" class="book-form">
-    <div class="form-group">
-      <label for="title">Titel:</label>
-      <input id="title" [(ngModel)]="book.title" name="title" required />
+  <form #bookForm="ngForm" (ngSubmit)="createBook(bookForm)">
+    <!-- Titel -->
+    <label>Titel *</label>
+    <input type="text" name="title" [(ngModel)]="book.title" #title="ngModel" required minlength="2" maxlength="100"
+      class="form-control" />
+    <div *ngIf="bookForm.submitted && title.invalid" style="color: red;">
+      ❗ Titel ist erforderlich (mind. 2 Zeichen)
     </div>
 
-    <div class="form-group">
-      <label for="author">Autor:</label>
-      <input id="author" [(ngModel)]="book.author" name="author" required />
+    <!-- Autor -->
+    <label>Autor *</label>
+    <input type="text" name="author" [(ngModel)]="book.author" #author="ngModel" required minlength="2" maxlength="100"
+      class="form-control" />
+    <div *ngIf="bookForm.submitted && author.invalid" style="color: red;">
+      ❗ Autor ist erforderlich (mind. 2 Zeichen)
     </div>
 
-    <div class="form-group">
-      <label for="isbn">ISBN:</label>
-      <input id="isbn" [(ngModel)]="book.isbn" name="isbn" required />
+    <!-- ISBN -->
+    <label>ISBN *</label>
+    <input type="text" name="isbn" [(ngModel)]="book.isbn" #isbn="ngModel" required pattern="^[0-9\\-]{10,17}$"
+      class="form-control" />
+    <div *ngIf="bookForm.submitted && isbn.invalid" style="color: red;">
+      ❗ ISBN ist erforderlich (z. B. 978-3-16-148410-0)
     </div>
 
-    <div class="form-group">
-      <label for="description">Beschreibung:</label>
-      <textarea id="description" [(ngModel)]="book.description" name="description"></textarea>
+
+
+    <!-- Beschreibung -->
+    <label>Beschreibung</label>
+    <textarea name="description" [(ngModel)]="book.description" rows="3" class="form-control"></textarea>
+
+    <!-- Veröffentlichungsdatum -->
+    <label>Veröffentlichungsdatum</label>
+    <input type="date" name="publicationDate" [(ngModel)]="book.publicationDate" class="form-control" />
+
+    <!-- Preis -->
+    <label>Preis (€) *</label>
+    <input type="number" name="price" [(ngModel)]="book.price" #price="ngModel" required min="0" step="0.01"
+      class="form-control" />
+    <div *ngIf="bookForm.submitted && price.invalid" style="color: red;">
+      ❗ Preis ist erforderlich und muss ≥ 0 sein
     </div>
 
-    <div class="form-group">
-      <label for="publicationDate">Veröffentlichung:</label>
-      <input id="publicationDate" type="date" [(ngModel)]="book.publicationDate" name="publicationDate" />
+    <!-- Seitenanzahl -->
+    <label>Seiten *</label>
+    <input type="number" name="pages" [(ngModel)]="book.pages" #pages="ngModel" required min="1" class="form-control" />
+    <div *ngIf="bookForm.submitted && pages.invalid" style="color: red;">
+      ❗ Seitenanzahl ist erforderlich und muss ≥ 1 sein
     </div>
 
-    <div class="form-group">
-      <label for="genre">Genre:</label>
-      <input id="genre" [(ngModel)]="book.genre" name="genre" />
-    </div>
+    <!-- Genre -->
+    <label>Genre</label>
+    <input type="text" name="genre" [(ngModel)]="book.genre" maxlength="50" class="form-control" />
 
-    <div class="form-group">
-      <label for="pages">Seiten:</label>
-      <input id="pages" type="number" [(ngModel)]="book.pages" name="pages" />
-    </div>
+    <!-- Verfügbar -->
+    <label>
+      <input type="checkbox" name="inStock" [(ngModel)]="book.inStock" />
+      Verfügbar
+    </label>
 
-    <div class="form-group">
-      <label for="price">Preis (€):</label>
-      <input id="price" type="number" step="0.01" [(ngModel)]="book.price" name="price" />
-    </div>
-
-    <div class="form-group checkbox">
-      <label for="inStock">Verfügbar:</label>
-      <input id="inStock" type="checkbox" [(ngModel)]="book.inStock" name="inStock" />
-    </div>
-
-    <button type="submit" class="btn-primary">💾 Speichern</button>
+    <br /><br />
+    <button type="submit" class="btn btn-primary">
+      📘 Buch speichern
+    </button>
   </form>
-
-  <a routerLink="/books" class="back-link">🔙 Zurück zur Liste</a>
 </div>

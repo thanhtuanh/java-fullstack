@@ -1,71 +1,92 @@
 .form-container {
-  max-width: 600px;
+  max-width: 500px;
   margin: 40px auto;
-  padding: 24px;
-  border-radius: 10px;
-  background-color: #f8f9fa;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 24px;
-  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
 }
 
-.book-form .form-group {
+.form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
 }
 
-.book-form label {
-  font-weight: bold;
+.form-group label {
   margin-bottom: 6px;
+  font-weight: 600;
+  color: #222;
 }
 
-.book-form input,
-.book-form textarea {
-  padding: 8px;
-  font-size: 16px;
+input,
+textarea {
+  padding: 10px;
+  font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-.book-form textarea {
+textarea {
   resize: vertical;
+  min-height: 80px;
 }
 
-.form-group.checkbox {
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
+input[type="checkbox"] {
+  width: auto;
+  margin-top: 5px;
 }
 
 .btn-primary {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  background-color: #007bff;
-  border: none;
-  border-radius: 6px;
+  background-color: #1e88e5;
   color: white;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background 0.2s;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #1565c0;
 }
 
 .back-link {
   display: block;
+  margin-top: 16px;
   text-align: center;
-  margin-top: 20px;
+  color: #555;
   text-decoration: none;
-  color: #333;
 }
 
 .back-link:hover {
   text-decoration: underline;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn {
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
