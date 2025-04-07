@@ -28,6 +28,10 @@ public class BookService {
                 .collect(Collectors.toList());
     }
 
+    public Optional<Book> findById(Long id) {
+        return bookRepository.findById(id);
+    }
+
     public BookDTO getBookById(Long id) {
         return bookRepository.findById(id)
                 .map(this::convertToDTO)
@@ -76,7 +80,7 @@ public class BookService {
         if (existingBook.isPresent()) {
             throw new DuplicateIsbnException("Buch mit ISBN " + bookDTO.getIsbn() + " existiert bereits");
         }
-        
+
         Book book = convertToEntity(bookDTO);
         Book savedBook = bookRepository.save(book);
         log.info("Buch erstellt: {} mit ID: {}", savedBook.getTitle(), savedBook.getId());
@@ -87,18 +91,18 @@ public class BookService {
     public BookDTO updateBook(Long id, BookDTO bookDTO) {
         Book existingBook = bookRepository.findById(id)
                 .orElseThrow(() -> new BookNotFoundException("Buch mit ID " + id + " nicht gefunden"));
-        
+
         // Überprüfen, ob die neue ISBN bereits existiert (falls geändert)
         if (!existingBook.getIsbn().equals(bookDTO.getIsbn())) {
             bookRepository.findByIsbn(bookDTO.getIsbn()).ifPresent(book -> {
                 throw new DuplicateIsbnException("Buch mit ISBN " + bookDTO.getIsbn() + " existiert bereits");
             });
         }
-        
+
         // ID beibehalten
         bookDTO.setId(id);
         BeanUtils.copyProperties(bookDTO, existingBook, "id");
-        
+
         Book updatedBook = bookRepository.save(existingBook);
         log.info("Buch aktualisiert: {} mit ID: {}", updatedBook.getTitle(), updatedBook.getId());
         return convertToDTO(updatedBook);

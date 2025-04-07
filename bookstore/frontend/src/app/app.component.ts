@@ -10,6 +10,6 @@ import { NavbarComponent } from './components/navbar/navbar.component'; // ✅ W
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = '';
+  title = 'Thanh-Bookstore';
 }
 // Hier wird die Navbar-Komponente in der AppComponent verwendet.
