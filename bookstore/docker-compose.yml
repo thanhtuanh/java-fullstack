@@ -8,7 +8,9 @@ services:
       POSTGRES_PASSWORD: admin
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./db/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+      - ./db/init-schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./db/init-data.sql:/docker-entrypoint-initdb.d/2-data.sql
+
     ports:
       - "5432:5432"
 
@@ -27,12 +29,17 @@ services:
       - "8080:8080"
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: bookstore-frontend
     depends_on:
       - backend
     ports:
-      - "4200:80"
+      - "4200:4200"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
 
 volumes:
   pgdata:

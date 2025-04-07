@@ -8,20 +8,20 @@ export interface Book {
   author: string;
   isbn: string;
   description: string;
-  publication_date: string;
+  publicationDate: string;
   price: number;
   pages: number;
   genre: string;
-  in_stock: boolean;
+  inStock: boolean;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private apiUrl = 'http://localhost:8080/api/books';
+  private readonly apiUrl = 'http://localhost:8080/api/books';
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
 
   // 📚 Alle Bücher abrufen
   getBooks(): Observable<Book[]> {
@@ -32,13 +32,18 @@ export class BookService {
   getBook(id: number): Observable<Book> {
     return this.http.get<Book>(`${this.apiUrl}/${id}`);
   }
+
+  // ➕ Neues Buch erstellen
   createBook(book: Book): Observable<Book> {
-  return this.http.post<Book>(this.apiUrl, book);
-}
+    return this.http.post<Book>(this.apiUrl, book);
+  }
+
+  // ✏️ Buch aktualisieren
   updateBook(id: number, book: Book): Observable<Book> {
     return this.http.put<Book>(`${this.apiUrl}/${id}`, book);
   }
 
+  // 🗑️ Buch löschen
   deleteBook(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }

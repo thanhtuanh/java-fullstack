@@ -1,13 +1,13 @@
-<h2>Login</h2>
+<div class="login-container">
+  <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+    <h2>Login</h2>
 
-<form (ngSubmit)="login()">
-  <label>Benutzername:</label>
-  <input [(ngModel)]="username" name="username" required><br>
+    <input type="text" name="username" [(ngModel)]="username" placeholder="Benutzername" required />
 
-  <label>Passwort:</label>
-  <input [(ngModel)]="password" name="password" type="password" required><br><br>
+    <input type="password" name="password" [(ngModel)]="password" placeholder="Passwort" required />
 
-  <button type="submit">Einloggen</button>
-</form>
+    <button type="submit">Einloggen</button>
+  </form>
 
-<p style="color:red" *ngIf="error">{{ error }}</p>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+</div>

@@ -4,9 +4,9 @@ export interface Book {
   author: string;
   isbn: string;
   description: string;
-  publication_date: string;
+  publicationDate: string;
   price: number;
   pages: number;
   genre: string;
-  in_stock: boolean;
+  inStock: boolean;
 }

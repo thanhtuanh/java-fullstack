@@ -1,34 +1,54 @@
-<h2>Buch bearbeiten</h2>
+<div class="form-container">
+  <h2>Buch bearbeiten</h2>
 
-<form *ngIf="book" (ngSubmit)="updateBook()">
-  <label for="title">Titel:</label>
-  <input id="title" [(ngModel)]="book.title" name="title" required><br>
+  <form (ngSubmit)="updateBook()" *ngIf="book" class="book-form">
+    <div class="form-group">
+      <label for="title">Titel:</label>
+      <input id="title" [(ngModel)]="book.title" name="title" required />
+    </div>
 
-  <label for="author">Autor:</label>
-  <input id="author" [(ngModel)]="book.author" name="author" required><br>
+    <div class="form-group">
+      <label for="author">Autor:</label>
+      <input id="author" [(ngModel)]="book.author" name="author" required />
+    </div>
 
-  <label for="isbn">ISBN:</label>
-  <input id="isbn" [(ngModel)]="book.isbn" name="isbn" required><br>
+    <div class="form-group">
+      <label for="isbn">ISBN:</label>
+      <input id="isbn" [(ngModel)]="book.isbn" name="isbn" required />
+    </div>
 
-  <label for="description">Beschreibung:</label>
-  <textarea id="description" [(ngModel)]="book.description" name="description"></textarea><br>
+    <div class="form-group">
+      <label for="description">Beschreibung:</label>
+      <textarea id="description" [(ngModel)]="book.description" name="description"></textarea>
+    </div>
 
-  <label for="publication_date">Veröffentlichung:</label>
-  <input id="publication_date" type="date" [(ngModel)]="book.publication_date" name="publication_date"><br>
+    <div class="form-group">
+      <label for="publicationDate">Veröffentlichung:</label>
+      <input id="publicationDate" type="date" [(ngModel)]="book.publicationDate" name="publicationDate" />
+    </div>
 
-  <label for="genre">Genre:</label>
-  <input id="genre" [(ngModel)]="book.genre" name="genre"><br>
+    <div class="form-group">
+      <label for="genre">Genre:</label>
+      <input id="genre" [(ngModel)]="book.genre" name="genre" />
+    </div>
 
-  <label for="pages">Seiten:</label>
-  <input id="pages" type="number" [(ngModel)]="book.pages" name="pages"><br>
+    <div class="form-group">
+      <label for="pages">Seiten:</label>
+      <input id="pages" type="number" [(ngModel)]="book.pages" name="pages" />
+    </div>
 
-  <label for="price">Preis (€):</label>
-  <input id="price" type="number" [(ngModel)]="book.price" name="price" step="0.01"><br>
+    <div class="form-group">
+      <label for="price">Preis (€):</label>
+      <input id="price" type="number" step="0.01" [(ngModel)]="book.price" name="price" />
+    </div>
 
-  <label for="in_stock">Verfügbar:</label>
-  <input id="in_stock" type="checkbox" [(ngModel)]="book.in_stock" name="in_stock"><br><br>
+    <div class="form-group checkbox">
+      <label for="inStock">Verfügbar:</label>
+      <input id="inStock" type="checkbox" [(ngModel)]="book.inStock" name="inStock" />
+    </div>
 
-  <button type="submit">Aktualisieren</button>
-</form>
+    <button type="submit" class="btn-primary">✅ Aktualisieren</button>
+  </form>
 
-<a routerLink="/books">Zurück zur Liste</a>
+  <a routerLink="/books" class="back-link">🔙 Zurück zur Liste</a>
+</div>

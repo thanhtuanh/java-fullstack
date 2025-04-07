@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
+import { BookService, Book } from '../../services/book.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { BookService } from '../../services/book.service';
-import { Book } from '../../models/book.model';
+
 
 @Component({
   selector: 'app-book-create',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './book-create.component.html'
+  imports: [CommonModule, FormsModule, RouterModule], // 🟢 RouterModule hinzufügen
+  templateUrl: './book-create.component.html',
+  styleUrls: ['./book-create.component.css']
+
 })
 export class BookCreateComponent {
   book: Book = {
@@ -18,14 +20,14 @@ export class BookCreateComponent {
     author: '',
     isbn: '',
     description: '',
-    publication_date: '',
+    publicationDate: '',
     price: 0,
     pages: 0,
     genre: '',
-    in_stock: true
+    inStock: true
   };
 
-  constructor(private readonly bookService: BookService, private readonly router: Router) {}
+  constructor(private readonly bookService: BookService, private readonly router: Router) { }
 
   createBook(): void {
     this.bookService.createBook(this.book).subscribe(() => {

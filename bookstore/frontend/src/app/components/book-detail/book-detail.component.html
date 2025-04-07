@@ -1,16 +1,52 @@
-<h2>Buchdetails</h2>
+<div class="form-container">
+  <h2>Buchdetails</h2>
 
-<div *ngIf="book">
-  <p><strong>Titel:</strong> {{ book.title }}</p>
-  <p><strong>Autor:</strong> {{ book.author }}</p>
-  <p><strong>ISBN:</strong> {{ book.isbn }}</p>
-  <p><strong>Beschreibung:</strong> {{ book.description }}</p>
-  <p><strong>Veröffentlichung:</strong> {{ book.publication_date }}</p>
-  <p><strong>Genre:</strong> {{ book.genre }}</p>
-  <p><strong>Seiten:</strong> {{ book.pages }}</p>
-  <p><strong>Preis:</strong> {{ book.price | currency:'EUR' }}</p>
-  <p><strong>Verfügbar:</strong> {{ book.in_stock ? 'Ja' : 'Nein' }}</p>
+  <div *ngIf="book" class="book-form">
+    <div class="form-group">
+      <label>Titel:</label>
+      <div>{{ book.title }}</div>
+    </div>
 
-  <button (click)="goToEdit()">Bearbeiten</button>
-  <a routerLink="/books">Zurück zur Liste</a>
+    <div class="form-group">
+      <label>Autor:</label>
+      <div>{{ book.author }}</div>
+    </div>
+
+    <div class="form-group">
+      <label>ISBN:</label>
+      <div>{{ book.isbn }}</div>
+    </div>
+
+    <div class="form-group">
+      <label>Beschreibung:</label>
+      <div>{{ book.description }}</div>
+    </div>
+
+    <div class="form-group">
+      <label>Veröffentlichung:</label>
+      <div>{{ book.publicationDate }}</div>
+    </div>
+
+    <div class="form-group">
+      <label>Genre:</label>
+      <div>{{ book.genre }}</div>
+    </div>
+
+    <div class="form-group">
+      <label>Seiten:</label>
+      <div>{{ book.pages }}</div>
+    </div>
+
+    <div class="form-group">
+      <label>Preis (€):</label>
+      <div>{{ book.price | number:'1.2-2' }}</div>
+    </div>
+
+    <div class="form-group">
+      <label>Verfügbar:</label>
+      <div>{{ book.inStock ? '✔️ Ja' : '❌ Nein' }}</div>
+    </div>
+  </div>
+
+  <a routerLink="/books" class="back-link">Zurück zur Liste</a>
 </div>

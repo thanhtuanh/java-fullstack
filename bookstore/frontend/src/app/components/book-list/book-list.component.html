@@ -1,35 +1,57 @@
-<h2>Bücherliste</h2>
+<div class="bookstore-wrapper">
+  <h1 class="headline">📚 Willkommen in <span class="brand">Thanh-Bookstore</span></h1>
 
-<button (click)="goToCreate()">➕ Neues Buch</button>
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchQuery" (input)="filterBooks()"
+      placeholder="🔍 Suche nach Titel, Autor oder Genre" class="search-input" />
+  </div>
 
-<div *ngIf="isLoading">Lade Bücher...</div>
-<div *ngIf="error">{{ error }}</div>
+  <div class="add-button-container">
+    <button [routerLink]="['/books/create']" class="btn-add">➕ Neues Buch hinzufügen</button>
+  </div>
+  <div *ngIf="isLoading" class="status loading">⏳ Bücher werden geladen...</div>
+  <div *ngIf="error" class="status error">⚠️ {{ error }}</div>
 
-<table *ngIf="!isLoading && books.length > 0" border="1" cellpadding="8">
-  <thead>
-    <tr>
-      <th>Titel</th>
-      <th>Autor</th>
-      <th>Genre</th>
-      <th>Preis</th>
-      <th>Aktionen</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let book of books">
-      <td>{{ book.title }}</td>
-      <td>{{ book.author }}</td>
-      <td>{{ book.genre }}</td>
-      <td>{{ book.price | currency:'EUR' }}</td>
-      <td>
-        <a [routerLink]="['/books', book.id]">Details</a> |
-        <a [routerLink]="['/books', book.id, 'edit']">Bearbeiten</a> |
-        <button (click)="deleteBook(book.id)">Löschen</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div *ngIf="filteredBooks.length > 0" class="table-wrapper">
+    <table class="book-table">
+      <thead>
+        <tr>
+          <th>Titel</th>
+          <th>Autor</th>
+          <th>Genre</th>
+          <th>Seiten</th>
+          <th>Preis (€)</th>
+          <th>Verfügbar</th>
+          <th>Aktion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of filteredBooks.slice(page * 15, (page + 1) * 15)">
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.genre }}</td>
+          <td>{{ book.pages }}</td>
+          <td>{{ book.price | number: '1.2-2' }}</td>
+          <td>
+            <span [class.available]="book.inStock" [class.unavailable]="!book.inStock">
+              {{ book.inStock ? '✔️ Ja' : '❌ Nein' }}
+            </span>
+          </td>
+          <td class="action-buttons">
+            <button (click)="onEdit(book)" class="btn-action edit">✏️</button>
+            <button (click)="onDelete(book)" class="btn-action delete">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<div *ngIf="!isLoading && books.length === 0">
-  <p>Keine Bücher gefunden.</p>
+    <mat-paginator [length]="filteredBooks.length" [pageSize]="5" [pageIndex]="page" (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>
+
+  <div *ngIf="filteredBooks.length === 0 && !isLoading" class="status empty">
+    📭 Keine Bücher gefunden.
+  </div>
+
+
 </div>
