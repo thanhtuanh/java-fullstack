@@ -58,10 +58,7 @@ java-fullstack/
 ├── book-api-validation-docker/
 │   ├── README.book-api-validation-docker.md
 │   ├── docker-compose.yml
-├── bookstore/
-│   ├── README.bookstore.md
-│   ├── backend/ (Spring Boot)
-│   ├── frontend/ (Angular)
+
 ```
 
 ## 📂 Teilprojekte
@@ -71,7 +68,7 @@ java-fullstack/
 - [`book-api-full`](./book-api-full/README.book-api-full.md) – Datenbankzugriff mit JPA
 - [`book-api-validation`](./book-api-validation/README.book-api-validation.md) – Validierung, Fehlerbehandlung, DTO
 - [`book-api-validation-docker`](./book-api-validation-docker/README.book-api-validation-docker.md) – Docker & PostgreSQL
-- [`bookstore`](./bookstore/README.bookstore.md) – Vollständige Fullstack-Anwendung mit Login + Angular
+- [`mybookstore`](https://github.com/thanhtuanh/mybookstore) – Vollständige Fullstack-Anwendung mit Login + Angular
 
 Jedes README enthält Screenshots oder `.gif`-Dateien zur Demonstration des Funktionsumfangs und `.http`-Dateien zum einfachen Testen.
 
@@ -102,20 +99,11 @@ mvn spring-boot:run
 cd book-api-validation-docker
 docker-compose up --build
 
-# ✅ Teil 7: bookstore (Fullstack)
-cd bookstore/backend
-mvn spring-boot:run
-
-cd bookstore/frontend
-npm install
-ng serve
-```
-
 ---
 
 ## 🏁 Wichtigster Teil: `bookstore`
 
-Das Modul `bookstore` stellt die **wichtigste Projektphase** dar, in der alle Anforderungen umgesetzt wurden:
+Das Modul `mybookstore` stellt die **wichtigste Projektphase** dar, in der alle Anforderungen umgesetzt wurden:
 
 - **JWT-basierte Login-Funktion mit Spring Security 6**
 - Benutzer-Authentifizierung und Token-Verwaltung
@@ -124,8 +112,9 @@ Das Modul `bookstore` stellt die **wichtigste Projektphase** dar, in der alle An
 - H2- oder PostgreSQL-Datenbank, konfigurierbar über `application.properties`
 - Erweiterbar für zukünftige Features wie User-Registrierung oder Rollenverwaltung
 
-👉 Details und Demo-Videos findest du im [`README.bookstore.md`](./bookstore/README.bookstore.md).
+👉 Details und Demo findest du im https://github.com/thanhtuanh/mybookstore.
 
 ---
 
 📘 Dieses README wird regelmäßig aktualisiert – Feedback willkommen!
+```
